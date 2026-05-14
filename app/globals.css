@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary: 87 87 87;   /* #575757 for dark text */
+    --color-secondary: 166 79 79; /* #A64F4F for accents */
+  }
+  
+  html {
+    width: 100%;
+    overflow-x: hidden;
+  }
+  
+  body {
+    @apply antialiased;
+    width: 100%;
+  }
+}
+
+@layer components {
+  .section-divider {
+    @apply w-20 h-px bg-gradient-to-r from-transparent via-stone-300/40 to-transparent mx-auto;
+  }
+  
+  .card-shadow {
+    @apply shadow-lg shadow-stone-200/30 hover:shadow-xl hover:shadow-stone-200/40 transition-shadow duration-300;
+  }
+  
+  .btn-primary {
+    @apply px-8 py-3.5 bg-stone-800 hover:bg-stone-700 text-white font-serif
+           text-lg tracking-wide rounded-lg transition-all duration-300 
+           hover:-translate-y-0.5 active:translate-y-0 min-w-[180px] 
+           border border-stone-700/30;
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-3.5 bg-white hover:bg-stone-50 text-stone-700 font-serif
+           text-lg tracking-wide rounded-lg transition-all duration-300 
+           hover:-translate-y-0.5 active:translate-y-0 min-w-[180px] 
+           border border-stone-300/80 hover:border-stone-400/50;
+  }
+}

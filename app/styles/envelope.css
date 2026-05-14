@@ -1,0 +1,612 @@
+/* Page Container */
+.envelope-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.instructions {
+  text-align: center;
+  margin-bottom: 40px;
+  z-index: 10;
+}
+
+.instruction-content {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.instruction-content h1 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-family: 'Georgia', serif;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.instruction-content p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* Envelope Container */
+.envelope-wrapper {
+  position: relative;
+  width: 500px;
+  height: 300px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.envelope-wrapper:hover:not(.opening) {
+  transform: scale(1.05) rotateX(5deg);
+}
+
+/* Envelope Base */
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+/* Envelope Back (Bottom Layer) */
+.envelope-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #8b5a2b 0%, #d4a574 100%);
+  border-radius: 4px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Back folds - 45 degree lines from corners */
+.back-fold {
+  position: absolute;
+  background: linear-gradient(to bottom right, transparent 49.5%, rgba(0, 0, 0, 0.1) 50%, transparent 50.5%);
+  width: 45%;
+  height: 45%;
+}
+
+.back-fold-left {
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-fold-right {
+  top: 0;
+  right: 0;
+  transform-origin: top right;
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-fold-bottom {
+  bottom: 0;
+  left: 27.5%;
+  width: 45%;
+  height: 45%;
+  transform-origin: bottom center;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Envelope Front (Middle Layer) */
+.envelope-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #a67c52 0%, #e6be8a 100%);
+  border-radius: 4px;
+  z-index: 2;
+  clip-path: polygon(0% 45%, 50% 100%, 100% 45%, 100% 100%, 0% 100%);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Front folds - 45 degree lines from top corners to center */
+.front-fold {
+  position: absolute;
+  background: linear-gradient(to bottom right, transparent 49.5%, rgba(0, 0, 0, 0.15) 50%, transparent 50.5%);
+}
+
+.front-fold-left {
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 45%;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  transform-origin: top left;
+}
+
+.front-fold-right {
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 45%;
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  transform-origin: top right;
+}
+
+.front-fold-bottom {
+  bottom: 0;
+  left: 27.5%;
+  width: 45%;
+  height: 45%;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Triangle shape for envelope front */
+.front-triangle {
+  position: absolute;
+  top: 45%;
+  left: 25%;
+  width: 50%;
+  height: 55%;
+  background: linear-gradient(135deg, #8b5a2b 0%, #d4a574 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  z-index: 2;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Envelope Flap (Top Layer) */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45%;
+  background: linear-gradient(135deg, #8b5a2b 0%, #d4a574 100%);
+  border-radius: 4px 4px 0 0;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  z-index: 3;
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 -5px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+}
+
+/* Flap shadow for opening animation */
+.flap-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+  opacity: 0;
+  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flap-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 30%);
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+}
+
+/* Flap folds - 45 degree lines from bottom corners */
+.flap-fold {
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  height: 45%;
+  background: linear-gradient(to top right, transparent 49.5%, rgba(0, 0, 0, 0.2) 50%, transparent 50.5%);
+}
+
+.flap-fold-left {
+  left: 0;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+  transform-origin: bottom left;
+}
+
+.flap-fold-right {
+  right: 0;
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+  transform-origin: bottom right;
+}
+
+/* Wax Seal */
+.wax-seal {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: transparent;
+  border-radius: 50%;
+  z-index: 4;
+  cursor: pointer;
+  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: sealPulse 2s infinite;
+}
+
+@keyframes sealPulse {
+  0%, 100% {
+    filter: drop-shadow(0 5px 15px rgba(210, 47, 47, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 5px 25px rgba(210, 47, 47, 0.6));
+  }
+}
+
+.seal-image-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(1.1) contrast(1.1);
+}
+
+.seal-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle at center, rgba(210, 47, 47, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* Opening Animation */
+.envelope-wrapper.opening .envelope-flap {
+  transform: rotateX(-180deg);
+  transition-delay: 0.3s;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.envelope-wrapper.opening .flap-shadow {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+.envelope-wrapper.opening .wax-seal {
+  transform: translate(-50%, -50%) translateY(-200px) scale(0.8);
+  opacity: 0;
+  transition-delay: 0.3s;
+}
+
+.envelope-wrapper.opening .envelope-wrapper {
+  transform: scale(1.1);
+}
+
+/* Page Footer */
+.page-footer {
+  margin-top: 40px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  z-index: 10;
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Home Page Styles */
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 40px 20px;
+  color: white;
+}
+
+.invitation-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.invitation-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.title {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  font-family: 'Georgia', serif;
+  color: #e6be8a;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+}
+
+.detail-card {
+  background: rgba(139, 90, 43, 0.2);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(230, 190, 138, 0.3);
+}
+
+.detail-card h2 {
+  color: #e6be8a;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+}
+
+.invitation-message {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.detail-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 25px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+}
+
+.detail-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.detail-content h3 {
+  color: #e6be8a;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.detail-content p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 5px;
+}
+
+.detail-sub {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.rsvp-section {
+  background: rgba(139, 90, 43, 0.2);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(230, 190, 138, 0.3);
+}
+
+.rsvp-section h2 {
+  color: #e6be8a;
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.rsvp-instruction {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-info p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+}
+
+.additional-info {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.additional-info h3 {
+  color: #e6be8a;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.additional-info ul {
+  list-style: none;
+  padding-left: 20px;
+}
+
+.additional-info li {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  position: relative;
+  padding-left: 30px;
+}
+
+.additional-info li:before {
+  content: '•';
+  color: #e6be8a;
+  font-size: 1.5rem;
+  position: absolute;
+  left: 0;
+  top: -2px;
+}
+
+.invitation-footer {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.invitation-footer p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.signature {
+  font-family: 'Georgia', serif;
+  font-size: 1.4rem !important;
+  color: #e6be8a !important;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .envelope-wrapper {
+    width: 90vw;
+    height: 200px;
+  }
+
+  .instruction-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .instruction-content p {
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .invitation-content {
+    padding: 20px;
+  }
+
+  .detail-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wax-seal {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .envelope-wrapper {
+    width: 95vw;
+    height: 180px;
+  }
+
+  .instruction-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .detail-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .wax-seal {
+    width: 60px;
+    height: 60px;
+  }
+}
