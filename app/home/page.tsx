@@ -362,7 +362,7 @@ export default function WeddingInvitation() {
               </div>
 
               <h1 className="font-script text-6xl md:text-7xl lg:text-8xl text-stone-800 leading-none tracking-wide">
-                Prena Shrestha
+              Prerna Shrestha
               </h1>
             </div>
 
@@ -545,7 +545,7 @@ export default function WeddingInvitation() {
                   </p>
                   <div className="pt-6">
                     <p className="font-script text-4xl text-stone-400/70">
-                      Sumit & Prena
+                      Sumit & Prerna
                     </p>
                     <p className="font-sans text-xs tracking-[0.3em] uppercase text-stone-400/50 mt-4">
                       July 03 (Ashar 19), 2026
@@ -646,7 +646,7 @@ export default function WeddingInvitation() {
                 >
                   <img
                     src="/assets/invitation.png"
-                    alt="Wedding invitation card for Sumit and Prena"
+                    alt="Wedding invitation card for Sumit and Prerna"
                     draggable={false}
                     className="max-h-[min(85vh,820px)] w-auto max-w-full object-contain pointer-events-none"
                   />

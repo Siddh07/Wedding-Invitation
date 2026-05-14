@@ -39,7 +39,7 @@ export default function EnvelopePage() {
               </div>
 
               <h1 className="font-['var(--font-great-vibes)'] text-6xl md:text-8xl text-rose-900/90 leading-tight">
-                Prena Shrestha
+              Prerna Shrestha
               </h1>
             </div>
 
