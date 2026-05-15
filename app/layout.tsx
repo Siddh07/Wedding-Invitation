@@ -3,8 +3,8 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Sumit & Prerna - Wedding Invitation',
-  description: 'You are cordially invited to celebrate the wedding of Sumit Shrestha and Prerna Shrestha',
-  keywords: ['wedding', 'invitation', 'Sumit Shrestha', 'Prerna Shrestha', 'wedding invitation'],
+  description: 'You are cordially invited to celebrate the wedding of Sumit Shrestha and Prerna Pradhan',
+  keywords: ['wedding', 'invitation', 'Sumit Shrestha', 'Prerna Pradhan', 'wedding invitation'],
   authors: [{ name: 'Sumit & Prerna' }],
   viewport: {
     width: 'device-width',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Sumit & Prerna - Wedding Invitation',
-    description: 'You are cordially invited to celebrate the wedding of Sumit Shrestha and Prerna Shrestha',
+    description: 'You are cordially invited to celebrate the wedding of Sumit Shrestha and Prerna Pradhan',
     url: 'https://sudhabilip.com',
     siteName: 'Sumit & Prerna Wedding',
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Sumit & Prerna - Wedding Invitation',
-    description: 'You are cordially invited to celebrate the wedding of Sumit Shrestha and Prerna Shrestha',
+    description: 'You are cordially invited to celebrate the wedding of Sumit Shrestha and Prerna Pradhan',
     images: ['/assets/Intro-image.png'],
   },
 };

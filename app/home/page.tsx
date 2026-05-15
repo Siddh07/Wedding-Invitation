@@ -362,7 +362,7 @@ export default function WeddingInvitation() {
               </div>
 
               <h1 className="font-script text-6xl md:text-7xl lg:text-8xl text-stone-800 leading-none tracking-wide">
-              Prerna Shrestha
+              Prerna Pradhan
               </h1>
             </div>
 
