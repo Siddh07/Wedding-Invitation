@@ -7,7 +7,6 @@ import {
   Heart,
   MapPin,
   RotateCcw,
-  Shirt,
   Timer,
   Users,
   Volume2,
@@ -389,7 +388,7 @@ export default function WeddingInvitation() {
             <div className="bg-white/80 backdrop-blur-sm border border-white/50 rounded-3xl p-10 md:p-16 shadow-2xl shadow-stone-200/30 relative">
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/60 to-transparent pointer-events-none"></div>
               
-              <div className="relative grid md:grid-cols-3 gap-12">
+              <div className="relative mx-auto grid max-w-4xl gap-12 md:grid-cols-2 md:gap-x-16 md:gap-y-10">
                 
                 {/* Time */}
                 <div className="text-center space-y-4 group">
@@ -439,22 +438,6 @@ export default function WeddingInvitation() {
                       View on map
                     </a>
                   </div>
-                </div>
-
-                {/* Attire */}
-                <div className="text-center space-y-4 group">
-                  <div className="inline-flex items-center justify-center size-16 rounded-full bg-stone-50/70 border border-stone-200/70 mb-3 group-hover:border-stone-300 group-hover:bg-stone-50 transition-all duration-500">
-                    <Shirt className="size-7 text-stone-500/80 group-hover:text-stone-600 transition-colors" strokeWidth={1.3} />
-                  </div>
-                  <h3 className="font-sans text-xs tracking-[0.25em] uppercase text-stone-500/70 font-medium">
-                    Attire
-                  </h3>
-                  <p className="font-serif text-2xl text-stone-800 font-light">
-                    Formal Attire
-                  </p>
-                  <p className="font-serif text-stone-500/90 text-sm italic">
-                    Traditional wear welcomed
-                  </p>
                 </div>
               </div>
             </div>
