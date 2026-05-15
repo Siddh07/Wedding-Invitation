@@ -443,7 +443,7 @@ export default function WeddingInvitation() {
             </div>
 
             {/* 💝 GIFTS SECTION */}
-            <div className="max-w-2xl mx-auto text-center space-y-6">
+            {/* <div className="max-w-2xl mx-auto text-center space-y-6">
               <div className="inline-flex items-center justify-center size-14 rounded-full bg-rose-50/70 border border-rose-100/70 mb-2">
                 <Gift className="size-7 text-rose-400/80" strokeWidth={1.3} />
               </div>
@@ -457,7 +457,7 @@ export default function WeddingInvitation() {
               <p className="font-serif text-stone-600/70 text-lg font-light leading-relaxed max-w-lg mx-auto">
                 Having you by our side on this special day is all we need. However, if you wish to give us a gift, any form of present will be received with much love and gratitude.
               </p>
-            </div>
+            </div> */}
 
             {/* ⏳ COUNTDOWN SECTION – days, hours, minutes + date below */}
             <div className="max-w-3xl mx-auto text-center space-y-8">
